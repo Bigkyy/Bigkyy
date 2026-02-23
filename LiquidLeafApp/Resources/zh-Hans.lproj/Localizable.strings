@@ -1,0 +1,30 @@
+"unknown_author" = "未知作者";
+"pdf_placeholder" = "已支持导入 PDF。PDF 分页渲染将在下一步实现。";
+"unsupported_format" = "暂不支持该格式。";
+"epub_placeholder" = "EPUB 已导入（%@）。完整章节解析模块已预留接口。";
+"open_failed" = "打开书籍失败：%@";
+
+"theme_paper" = "纸张";
+"theme_sepia" = "护眼棕";
+"theme_darkGray" = "深灰";
+"theme_pureBlack" = "纯黑";
+"theme_softGreen" = "浅绿";
+
+"library_tab" = "书库";
+"continue_tab" = "继续阅读";
+"settings_tab" = "设置";
+"import_book" = "导入书籍";
+"empty_library_title" = "还没有书";
+"empty_library_subtitle" = "导入 EPUB、TXT 或 PDF 开始阅读。";
+"import_failed" = "导入失败";
+"ok" = "确定";
+"prev_page" = "上一页";
+"next_page" = "下一页";
+"theme_picker" = "主题";
+"continue_reading" = "继续阅读";
+"recent_history" = "最近阅读";
+"progress_percent" = "已读 %d%%";
+"language_title" = "语言";
+"language_hint" = "应用将跟随系统语言（中文/英文）。";
+"about_title" = "关于";
+"about_body" = "LiquidLeaf MVP：导入、阅读、主题切换、阅读进度记录。";

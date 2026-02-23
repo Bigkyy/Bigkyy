@@ -1,0 +1,30 @@
+"unknown_author" = "Unknown Author";
+"pdf_placeholder" = "PDF support is included in import. Reader rendering for PDF pages is the next implementation step.";
+"unsupported_format" = "This format is not supported yet.";
+"epub_placeholder" = "EPUB imported (%@). Full chapter parsing is prepared as the next module.";
+"open_failed" = "Failed to open the book: %@";
+
+"theme_paper" = "Paper";
+"theme_sepia" = "Sepia";
+"theme_darkGray" = "Dark";
+"theme_pureBlack" = "Black";
+"theme_softGreen" = "Green";
+
+"library_tab" = "Library";
+"continue_tab" = "Continue";
+"settings_tab" = "Settings";
+"import_book" = "Import Book";
+"empty_library_title" = "No books yet";
+"empty_library_subtitle" = "Import EPUB, TXT, or PDF to start reading.";
+"import_failed" = "Import failed";
+"ok" = "OK";
+"prev_page" = "Previous";
+"next_page" = "Next";
+"theme_picker" = "Theme";
+"continue_reading" = "Continue Reading";
+"recent_history" = "Recent History";
+"progress_percent" = "%d%% completed";
+"language_title" = "Language";
+"language_hint" = "The app follows your device language (English / Chinese).";
+"about_title" = "About";
+"about_body" = "LiquidLeaf MVP: import, read, theme switch, and progress tracking.";
