@@ -1,0 +1,14 @@
+"library_title" = "My Library";
+"import_button" = "Import Files";
+"import_failed_title" = "Import Failed";
+"ok_button" = "OK";
+"font_size_label" = "Font Size";
+"theme_label" = "Background";
+"theme_paper" = "Paper";
+"theme_night" = "Night";
+"theme_mint" = "Mint";
+"theme_sky" = "Sky";
+"empty_title" = "No books yet";
+"empty_subtitle" = "Import EPUB, TXT, MD, or RTF files to start reading.";
+"error_unreadable" = "The selected file could not be read.";
+"error_unsupported" = "This file format is not currently supported.";

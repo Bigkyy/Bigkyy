@@ -1,0 +1,14 @@
+"library_title" = "我的书库";
+"import_button" = "导入文件";
+"import_failed_title" = "导入失败";
+"ok_button" = "确定";
+"font_size_label" = "字体大小";
+"theme_label" = "背景";
+"theme_paper" = "纸张";
+"theme_night" = "夜间";
+"theme_mint" = "薄荷";
+"theme_sky" = "天空";
+"empty_title" = "还没有书籍";
+"empty_subtitle" = "导入 EPUB、TXT、MD 或 RTF 文件后即可开始阅读。";
+"error_unreadable" = "无法读取所选文件。";
+"error_unsupported" = "暂不支持此文件格式。";
