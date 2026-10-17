@@ -115,6 +115,14 @@ struct ContentView: View {
         var added: [ReaderDocument] = []
 
         for url in urls {
+            // Keep Files-provider access alive until this file is fully read.
+            let didStartAccess = url.startAccessingSecurityScopedResource()
+            defer {
+                if didStartAccess {
+                    url.stopAccessingSecurityScopedResource()
+                }
+            }
+
             do {
                 let document = try importer.importDocument(from: url)
                 added.append(document)

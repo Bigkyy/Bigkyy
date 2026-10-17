@@ -1,5 +1,12 @@
 import Foundation
 import UniformTypeIdentifiers
+import ZIPFoundation
+
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 enum DocumentImportError: LocalizedError {
     case unreadable
@@ -69,33 +76,38 @@ struct DocumentImportService {
     }
 
     private func makeEPUBDocument(from url: URL) throws -> ReaderDocument {
-        let archiveDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString)
+        do {
+            let archive = try Archive(url: url, accessMode: .read)
+            let htmlEntries = archive.filter {
+                $0.type == .file && ["xhtml", "html", "htm"].contains(
+                    ($0.path as NSString).pathExtension.lowercased()
+                )
+            }.sorted { $0.path < $1.path }
 
-        try FileManager.default.createDirectory(at: archiveDirectory, withIntermediateDirectories: true)
-        defer { try? FileManager.default.removeItem(at: archiveDirectory) }
+            // Consume only chapter data in memory; never materialize archive paths
+            // or symlinks on disk. Preserve the MVP's path order and UTF-8 handling.
+            let chapters = try htmlEntries.compactMap { entry -> String? in
+                var data = Data()
+                let checksum = try archive.extract(entry) { data.append($0) }
+                guard checksum == entry.checksum else {
+                    throw DocumentImportError.unreadable
+                }
+                return String(data: data, encoding: .utf8)
+            }
+            let merged = chapters.joined(separator: "\n\n")
+            guard !merged.isEmpty else {
+                throw DocumentImportError.unreadable
+            }
 
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        process.arguments = [url.path, "-d", archiveDirectory.path]
-        try process.run()
-        process.waitUntilExit()
-
-        let enumerator = FileManager.default.enumerator(at: archiveDirectory, includingPropertiesForKeys: nil)
-        let htmlFiles = (enumerator?.allObjects as? [URL] ?? []).filter { ["xhtml", "html", "htm"].contains($0.pathExtension.lowercased()) }
-            .sorted { $0.path < $1.path }
-
-        let merged = htmlFiles.compactMap { try? String(contentsOf: $0, encoding: .utf8) }.joined(separator: "\n\n")
-        guard !merged.isEmpty else {
+            return ReaderDocument(
+                fileName: url.lastPathComponent,
+                fileURL: url,
+                importedAt: .now,
+                content: merged.replacingOccurrences(of: "<[^>]+>", with: " ", options: .regularExpression),
+                fileType: .epub
+            )
+        } catch {
             throw DocumentImportError.unreadable
         }
-
-        return ReaderDocument(
-            fileName: url.lastPathComponent,
-            fileURL: url,
-            importedAt: .now,
-            content: merged.replacingOccurrences(of: "<[^>]+>", with: " ", options: .regularExpression),
-            fileType: .epub
-        )
     }
 }
